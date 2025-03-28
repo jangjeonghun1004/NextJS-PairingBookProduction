@@ -136,7 +136,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
-  const [showAlert, setShowAlert] = useState(false)
+  // const [showAlert, setShowAlert] = useState(false)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -222,8 +222,8 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
       setLoading(false)
 
       // Show alert after loading
-      setShowAlert(true)
-      setTimeout(() => setShowAlert(false), 3000)
+      // setShowAlert(true)
+      // setTimeout(() => setShowAlert(false), 3000)
 
       // Limit the number of pages that can be loaded
       if (page >= 4) {
@@ -355,7 +355,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
       )}
 
       {/* Alert notification */}
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {showAlert && (
           <motion.div
             className="fixed bottom-20 left-0 right-0 mx-auto max-w-sm bg-rose-50 rounded-lg shadow-lg p-4 border border-rose-200 z-40"
@@ -371,7 +371,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       {/* End of content message */}
       {!hasMore && !loading && filteredPosts.length > 0 && (

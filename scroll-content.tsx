@@ -42,71 +42,91 @@ export default function ScrollContent() {
     sessionStorage.setItem("scrollPosition", window.scrollY.toString())
   }
 
-  // 샘플 인스타그램 카드 데이터
-  const instagramPosts = [
-    {
-      id: 1,
-      username: "bookworm_jane",
-      userAvatar: "/placeholder.svg?height=100&width=100",
-      imageUrl: "/placeholder.svg?height=600&width=600",
-      caption: "오늘의 추천 도서 📚 이 책은 정말 감동적이에요! #페어링북 #독서 #책스타그램",
-      likes: 243,
-      timestamp: "2 hours ago",
-      location: "서울 강남",
-      category: "reviews",
-    },
+   // 샘플 인스타그램 카드 데이터
+   const instagramPosts = [
     {
       id: 2,
-      username: "literature_park",
+      username: "제연",
       userAvatar: "/placeholder.svg?height=100&width=100",
-      imageUrl: "/placeholder.svg?height=600&width=600",
-      caption: "커피와 함께하는 아침 독서 시간 ☕📖 #아침독서 #페어링북 #북스타그램",
+      imageUrl: "/img/sky-blue.png",
+      caption: "#하트페어링 #인스타그램",
       likes: 187,
-      timestamp: "5 hours ago",
-      category: "morning",
+      timestamp: "",
+      location: "하늘색 책",
+      category: "tv",
+      linkUrl: "https://www.instagram.com/p/DHdbMgtJXOw/"
     },
     {
-      id: 3,
-      username: "book_collector",
+      id: 1,
+      username: "우재",
       userAvatar: "/placeholder.svg?height=100&width=100",
-      imageUrl: "/placeholder.svg?height=600&width=600",
-      caption: "오늘 페어링북에서 추천받은 책들 💕 취향저격! #페어링북 #책추천 #독서모임",
-      likes: 342,
-      timestamp: "1 day ago",
-      location: "페어링북 카페",
-      category: "recommendations",
+      imageUrl: "/img/blue-light.png",
+      caption: "#하트페어링 #인스타그램",
+      likes: 243,
+      timestamp: "",
+      location: "푸른색 책",
+      category: "tv",
+      linkUrl: "https://www.instagram.com/p/DGnNs_qJ6iK/?img_index=1"
     },
     {
       id: 4,
-      username: "reading_club",
+      username: "하늘",
       userAvatar: "/placeholder.svg?height=100&width=100",
-      imageUrl: "/placeholder.svg?height=600&width=600",
-      caption: "이번 주 독서모임에서 토론한 책입니다. 다양한 의견이 오갔어요! #독서모임 #페어링북 #토론",
+      imageUrl: "/img/white.png",
+      caption: "#하트페어링 #인스타그램",
       likes: 156,
-      timestamp: "3 days ago",
-      location: "페어링북 독서모임",
-      category: "discussions",
+      timestamp: "",
+      location: "하얀색 책",
+      category: "tv",
+      linkUrl: 'https://www.instagram.com/p/DGnOALFJScd/?img_index=1'
     },
     {
-      id: 5,
-      username: "daily_reader",
+      id: 3,
+      username: "지민",
       userAvatar: "/placeholder.svg?height=100&width=100",
-      imageUrl: "/placeholder.svg?height=600&width=600",
-      caption: "오늘의 독서 일기 📝 이 책을 읽으며 많은 생각을 하게 됐어요 #독서일기 #페어링북 #서평",
-      likes: 278,
-      timestamp: "4 days ago",
-      category: "diaries",
+      imageUrl: "/img/brown.png",
+      caption: "#하트페어링 #인스타그램",
+      likes: 342,
+      timestamp: "",
+      location: "갈색 책",
+      category: "tv",
+      linkUrl: 'https://www.instagram.com/p/DHdbODbpFHt/'
     },
     {
       id: 6,
-      username: "book_store",
+      username: "지원",
       userAvatar: "/placeholder.svg?height=100&width=100",
-      imageUrl: "/placeholder.svg?height=600&width=600",
-      caption: "이번 주 신간 도서가 입고되었습니다! #신간도서 #페어링북 #책스타그램",
+      imageUrl: "/img/green.png",
+      caption: "#하트페어링 #인스타그램",
       likes: 421,
-      timestamp: "1 week ago",
-      location: "페어링북 서점",
-      category: "books",
+      timestamp: "",
+      location: "초록색 책",
+      category: "tv",
+      linkUrl: 'https://www.instagram.com/p/DGskJG5p4h5/?img_index=1'
+    },
+    {
+      id: 7,
+      username: "찬형",
+      userAvatar: "/placeholder.svg?height=100&width=100",
+      imageUrl: "/img/blue.png",
+      caption: "#하트페어링 #인스타그램",
+      likes: 421,
+      timestamp: "",
+      location: "파랑색 책",
+      category: "tv",
+      linkUrl: 'https://www.instagram.com/p/DGxDRmNJbEl/?img_index=1'
+    },
+    {
+      id: 5,
+      username: "창환",
+      userAvatar: "/placeholder.svg?height=100&width=100",
+      imageUrl: "/img/yellow.png",
+      caption: "#하트페어링 #인스타그램",
+      likes: 278,
+      timestamp: "",
+      location: "노랑색 책",
+      category: "tv",
+      linkUrl: 'https://www.instagram.com/p/DGp_A6qpEac/?img_index=1'
     },
   ]
 
@@ -133,7 +153,8 @@ export default function ScrollContent() {
                 damping: 20,
               }}
             >
-              독자들의 이야기
+              {/* 독자들의 이야기 */}
+              하트페어링 이야기
             </motion.h2>
 
             <motion.p
@@ -142,7 +163,8 @@ export default function ScrollContent() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              페어링 BOOK 독자들의 다양한 이야기를 만나보세요
+              {/* 페어링 BOOK 독자들의 다양한 이야기를 만나보세요 */}
+              채널A 새 연애 예능
             </motion.p>
 
             {/* InstagramCard를 Link로 감싸는 대신 직접 클릭 이벤트 처리 */}
@@ -161,6 +183,7 @@ export default function ScrollContent() {
                     index={index}
                     viewMode="grid"
                     category={post.category}
+                    linkUrl={post.linkUrl}
                   />
                 </div>
               ))}
@@ -180,49 +203,7 @@ export default function ScrollContent() {
             </div>
           </div>
         </div>
-
-        <FeaturesSection />
-
-        {/* Stories Preview Section */}
-        <div className="py-16 bg-white/80">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <motion.h2
-              className="text-2xl font-bold text-rose-600 mb-6"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              }}
-            >
-              나만의 이야기 시작하기
-            </motion.h2>
-
-            <motion.p
-              className="text-gray-600 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              지금 바로 페어링 BOOK에서 당신만의 특별한 이야기를 시작해보세요
-            </motion.p>
-
-            <Link href="/signup">
-              <motion.button
-                className="inline-flex items-center gap-2 px-6 py-3 bg-rose-500 text-white rounded-full font-medium shadow-md hover:bg-rose-600 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>회원가입 하기</span>
-                <ArrowRight size={16} />
-              </motion.button>
-            </Link>
-          </div>
-        </div>
-
-        <TestimonialsSection />
-        <CTASection />
+        
         <Footer />
       </div>
     </div>

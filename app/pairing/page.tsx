@@ -276,6 +276,15 @@ export default function PairingPage() {
   const messageEndRef = useRef<HTMLDivElement>(null)
   const messageInputRef = useRef<HTMLInputElement>(null)
 
+  // 페이지 로드 시 스크롤을 맨 위로 이동
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    document.body.style.paddingTop = "64px"
+    return () => {
+      document.body.style.paddingTop = "0"
+    }
+  }, [])
+
   // 검색어에 따라 필터링된 목록
   const filteredRequests = requests.filter(
     (request) =>
@@ -498,9 +507,9 @@ export default function PairingPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      <div className="max-w-4xl mx-auto pt-20 px-4 pb-16">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Back button */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <Link href="/">
             <motion.button
               className="flex items-center gap-2 text-rose-600 font-medium"
@@ -511,7 +520,7 @@ export default function PairingPage() {
               <span>홈으로 돌아가기</span>
             </motion.button>
           </Link>
-        </div>
+        </div> */}
 
         <motion.div
           className="text-center mb-8"

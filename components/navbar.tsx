@@ -127,9 +127,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all duration-300 ${
-        scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent"}`}
       variants={navbarVariants}
       initial="hidden"
       animate="visible"
@@ -157,7 +155,6 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           {[
             { name: "독서 이야기", id: "stories", href: "/stories" },
-            { name: "독서 일기", id: "diary-create", href: "/diary/create" },
             { name: "독서 토론", id: "discussion-create", href: "/discussions" },
             { name: "페어링 친구", id: "pairing", href: "/pairing" },
           ].map((item, index) => (
@@ -289,7 +286,7 @@ export default function Navbar() {
           </motion.div>
 
           {/* Diary Link for Mobile */}
-          <motion.div variants={itemVariants}>
+          {/* <motion.div variants={itemVariants}>
             <Link href="/diary/create">
               <motion.button
                 className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
@@ -300,7 +297,7 @@ export default function Navbar() {
                 <PenSquare size={18} />
               </motion.button>
             </Link>
-          </motion.div>
+          </motion.div> */}
 
           {/* Discussion Link for Mobile */}
           <motion.div variants={itemVariants}>

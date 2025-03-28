@@ -162,7 +162,7 @@ export default function DiscussionsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-rose-600 mb-2">독서 토론</h1>
+          <h1 className="text-3xl font-bold text-rose-600 mb-2">나의 독서 토론</h1>
           <p className="text-gray-600">다양한 책에 대한 토론에 참여하고 의견을 나눠보세요</p>
         </motion.div>
 

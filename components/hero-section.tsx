@@ -6,12 +6,14 @@ import AnimatedBackground from "./animated-background"
 import CustomLogo from "./icons/custom-logo"
 import { useTheme } from "./theme-provider"
 import LoggedInHero from "./logged-in-hero"
+import { useRouter } from "next/navigation"
 
 export default function HeroSection() {
   const [animationStage, setAnimationStage] = useState(0)
   const [visible, setVisible] = useState(false)
   const { logoColor, logoStrokeColor } = useTheme()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const router = useRouter();
 
   // Handle drawing animation completion
   const handleDrawingComplete = useCallback(() => {
@@ -93,7 +95,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Animated background only in hero section */}
-      <AnimatedBackground particleCount={60} elementCount={20} elements={["♥", "✨", "∞", "♡"]} />
+      <AnimatedBackground particleCount={60} elementCount={20} elements={["♥", "♡","♥", "♡"]} />
 
       {/* Gradient overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/70 pointer-events-none" />
@@ -230,6 +232,7 @@ export default function HeroSection() {
               className="px-8 py-3 bg-rose-500 text-white rounded-full font-medium shadow-lg hover:bg-rose-600 transition-colors duration-300 transform-gpu"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => {router.push('/stories')}}
             >
               시작하기
             </motion.button>

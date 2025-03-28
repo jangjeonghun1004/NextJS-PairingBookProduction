@@ -82,7 +82,7 @@ export default function StoriesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-rose-600 mb-2">독자들의 이야기</h1>
+          <h1 className="text-3xl font-bold text-rose-600 mb-2">독서 이야기</h1>
           <p className="text-gray-600">페어링 BOOK 독자들의 다양한 이야기를 만나보세요</p>
         </motion.div>
 
@@ -93,7 +93,7 @@ export default function StoriesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <Link href="/diary/create">
+          <Link href="/diary">
             <motion.button
               className="flex items-center gap-2 px-6 py-3 bg-rose-500 text-white rounded-full font-medium shadow-md hover:bg-rose-600 transition-colors"
               whileHover={{ scale: 1.05 }}
@@ -104,7 +104,7 @@ export default function StoriesPage() {
             </motion.button>
           </Link>
 
-          <Link href="/discussion/create">
+          <Link href="/discussions">
             <motion.button
               className="flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-full font-medium shadow-md hover:bg-rose-700 transition-colors"
               whileHover={{ scale: 1.05 }}

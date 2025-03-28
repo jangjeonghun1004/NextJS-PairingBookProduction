@@ -99,14 +99,14 @@ export default function CreateDiaryPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Back button */}
         <div className="mb-6">
-          <Link href="/stories">
+          <Link href="/diary">
             <motion.button
               className="flex items-center gap-2 text-rose-600 font-medium"
               whileHover={{ x: -5 }}
               whileTap={{ scale: 0.95 }}
             >
               <ArrowLeft size={18} />
-              <span>독자 이야기로 돌아가기</span>
+              <span>독서 일기로 돌아가기</span>
             </motion.button>
           </Link>
         </div>

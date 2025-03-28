@@ -27,7 +27,8 @@ interface InstagramCardProps {
   location?: string
   index?: number
   viewMode?: "grid" | "list"
-  category?: string
+  category?: string,
+  linkUrl?: string,
 }
 
 export default function InstagramCard({
@@ -43,6 +44,7 @@ export default function InstagramCard({
   index = 0,
   viewMode = "grid",
   category,
+  linkUrl,
 }: InstagramCardProps) {
   const router = useRouter()
   const [liked, setLiked] = useState(false)
@@ -57,7 +59,7 @@ export default function InstagramCard({
   const [toastMessage, setToastMessage] = useState("")
 
   const cardRef = useRef(null)
-  const isInView = useInView(cardRef, { once: false, amount: 0.3})
+  const isInView = useInView(cardRef, { once: false, amount: 0.3 })
 
   const handleLike = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -108,6 +110,8 @@ export default function InstagramCard({
     // 카테고리가 "discussions" 또는 "독서토론"인 경우 discussion 경로로 이동
     if (category === "discussions" || category === "독서토론") {
       router.push(`/discussion/${id}`)
+    } else if (category === "tv") {
+      window.open(`${linkUrl}`, "_blank", "noopener,noreferrer");
     } else {
       router.push(`/post/${id}`)
     }
@@ -181,6 +185,7 @@ export default function InstagramCard({
             setShowMenu(false)
           }}
           onClick={handleCardClick}
+          style={{ position: 'relative' }}
         >
           {/* Card Header */}
           <div className="flex items-center justify-between p-3">
@@ -192,6 +197,8 @@ export default function InstagramCard({
                   width={28}
                   height={28}
                   className="object-cover"
+                  priority
+                  loading="eager"
                 />
               </motion.div>
               <div>
@@ -247,7 +254,7 @@ export default function InstagramCard({
 
           {/* Image with Hover Overlay */}
           <div className="relative aspect-square" onDoubleClick={handleDoubleTap}>
-            <Image src={imageUrl || "/placeholder.svg"} alt="Post" fill className="object-cover" />
+            <Image src={imageUrl || "/placeholder.svg"} alt="Post" fill className="object-cover" priority loading="eager" />
 
             {/* Hover Overlay */}
             {isHovered && (
@@ -313,6 +320,7 @@ export default function InstagramCard({
           boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
         }}
         onClick={handleCardClick}
+        style={{ position: 'relative' }}
       >
         {/* Card Header */}
         <div className="flex items-center justify-between p-3 border-b">
@@ -329,6 +337,8 @@ export default function InstagramCard({
                 width={32}
                 height={32}
                 className="object-cover"
+                priority
+                loading="eager"
               />
             </motion.div>
             <div>
@@ -389,15 +399,15 @@ export default function InstagramCard({
           animate={
             isInView
               ? {
-                  scale: [0.95, 1],
-                  opacity: [0.8, 1],
-                }
+                scale: [0.95, 1],
+                opacity: [0.8, 1],
+              }
               : {}
           }
           transition={{ duration: 0.5 }}
         >
           <div className="aspect-square relative">
-            <Image src={imageUrl || "/placeholder.svg"} alt="Post" fill className="object-cover" />
+            <Image src={imageUrl || "/placeholder.svg"} alt="Post" fill className="object-cover" priority loading="eager" />
             {isDoubleTapLiked && (
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
@@ -418,9 +428,9 @@ export default function InstagramCard({
           animate={
             isInView
               ? {
-                  y: [10, 0],
-                  opacity: [0, 1],
-                }
+                y: [10, 0],
+                opacity: [0, 1],
+              }
               : {}
           }
           transition={{ duration: 0.3, delay: 0.2 }}
@@ -455,9 +465,9 @@ export default function InstagramCard({
           animate={
             isInView
               ? {
-                  y: [10, 0],
-                  opacity: [0, 1],
-                }
+                y: [10, 0],
+                opacity: [0, 1],
+              }
               : {}
           }
           transition={{ duration: 0.3, delay: 0.3 }}
@@ -471,9 +481,9 @@ export default function InstagramCard({
           animate={
             isInView
               ? {
-                  y: [10, 0],
-                  opacity: [0, 1],
-                }
+                y: [10, 0],
+                opacity: [0, 1],
+              }
               : {}
           }
           transition={{ duration: 0.3, delay: 0.4 }}
@@ -491,9 +501,9 @@ export default function InstagramCard({
             animate={
               isInView
                 ? {
-                    y: [10, 0],
-                    opacity: [0, 1],
-                  }
+                  y: [10, 0],
+                  opacity: [0, 1],
+                }
                 : {}
             }
             transition={{ duration: 0.3, delay: 0.5 }}
@@ -543,9 +553,9 @@ export default function InstagramCard({
           animate={
             isInView
               ? {
-                  y: [10, 0],
-                  opacity: [0, 1],
-                }
+                y: [10, 0],
+                opacity: [0, 1],
+              }
               : {}
           }
           transition={{ duration: 0.3, delay: 0.6 }}
@@ -560,9 +570,9 @@ export default function InstagramCard({
           animate={
             isInView
               ? {
-                  y: [10, 0],
-                  opacity: [0, 1],
-                }
+                y: [10, 0],
+                opacity: [0, 1],
+              }
               : {}
           }
           transition={{ duration: 0.3, delay: 0.7 }}
