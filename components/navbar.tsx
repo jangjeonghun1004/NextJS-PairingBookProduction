@@ -240,6 +240,12 @@ export default function Navbar() {
                         <span>내 프로필</span>
                       </button>
                     </Link>
+                    <Link href="/diary">
+                      <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <User size={16} className="mr-2" />
+                        <span>내 독서 일기</span>
+                      </button>
+                    </Link>
                     <Link href="/account/settings">
                       <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <Settings size={16} className="mr-2" />

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Navbar from "@/components/navbar"
 import InstagramFeed from "@/components/instagram-feed"
-import { Search, X, TrendingUp, Hash, PenSquare, MessageSquare } from "lucide-react"
+import { Search, X, TrendingUp, Hash, PenSquare, MessageSquare, ChevronLeft, ChevronRight, ArrowUp, Plus } from "lucide-react"
 import Link from "next/link"
 
 // Popular tags for the stories
@@ -30,6 +30,7 @@ export default function StoriesPage() {
   const [activeTab, setActiveTab] = useState("all")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
 
   // 페이지 로드 시 스크롤을 맨 위로 이동
   useEffect(() => {
@@ -71,6 +72,19 @@ export default function StoriesPage() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
+  // 스크롤 함수 추가 (handleTagSelect 함수 위에 추가)
+  const scrollTabsLeft = () => {
+    if (tabsContainerRef.current) {
+      tabsContainerRef.current.scrollBy({ left: -200, behavior: "smooth" })
+    }
+  }
+
+  const scrollTabsRight = () => {
+    if (tabsContainerRef.current) {
+      tabsContainerRef.current.scrollBy({ left: 200, behavior: "smooth" })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -87,7 +101,7 @@ export default function StoriesPage() {
         </motion.div>
 
         {/* 버튼 그룹 */}
-        <motion.div
+        {/* <motion.div
           className="flex flex-wrap justify-center gap-4 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,13 +128,12 @@ export default function StoriesPage() {
               <span>토론 발제문 작성하기</span>
             </motion.button>
           </Link>
-        </motion.div>
+        </motion.div> */}
 
         {/* Search Bar */}
         <motion.div
-          className={`relative max-w-xl mx-auto mb-6 transition-all duration-300 ${
-            isSearchFocused ? "scale-105" : "scale-100"
-          }`}
+          className={`relative max-w-xl mx-auto mb-6 transition-all duration-300 ${isSearchFocused ? "scale-105" : "scale-100"
+            }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -141,9 +154,8 @@ export default function StoriesPage() {
                 // Delay hiding suggestions to allow for clicks
                 setTimeout(() => setShowSuggestions(false), 200)
               }}
-              className={`w-full pl-10 pr-10 py-3 rounded-full border ${
-                isSearchFocused ? "border-rose-400 shadow-md" : "border-gray-300"
-              } focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all`}
+              className={`w-full pl-10 pr-10 py-3 rounded-full border ${isSearchFocused ? "border-rose-400 shadow-md" : "border-gray-300"
+                } focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all`}
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
 
@@ -215,7 +227,7 @@ export default function StoriesPage() {
         </motion.div>
 
         {/* Mobile Menu */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
               className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -266,36 +278,66 @@ export default function StoriesPage() {
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
-        {/* Category Tabs - Desktop */}
-        <div className="mb-8 border-b border-gray-200 hidden md:block">
-          <div className="flex overflow-x-auto scrollbar-hide space-x-6 pb-2">
-            {[
-              { id: "all", name: "전체" },
-              { id: "books", name: "도서" },
-              { id: "reviews", name: "서평" },
-              { id: "clubs", name: "독서모임" },
-              { id: "recommendations", name: "추천도서" },
-              { id: "morning", name: "아침독서" },
-              { id: "diaries", name: "독서일기" },
-              { id: "discussions", name: "독서토론" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => handleTabChange(tab.id)}
-                className={`whitespace-nowrap px-4 py-2 font-medium text-sm rounded-full transition-colors ${
-                  activeTab === tab.id ? "bg-rose-100 text-rose-600" : "text-gray-600 hover:text-rose-500"
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
+        {/* Category Tabs - Scrollable */}
+        <div className="mb-8 border-b border-gray-200 relative">
+          <div className="flex items-center mb-2">
+            {/* 좌측 스크롤 버튼 */}
+            <button
+              onClick={scrollTabsLeft}
+              className="flex-shrink-0 p-1.5 rounded-full bg-white shadow-sm text-gray-600 hover:bg-gray-100 mr-2 border border-gray-200"
+              aria-label="Scroll tabs left"
+            >
+              <ChevronLeft size={16} />
+            </button>
+
+            {/* 탭 컨테이너 */}
+            <div
+              className="flex-1 overflow-x-auto scrollbar-hide scroll-smooth"
+              style={{ scrollBehavior: "smooth" }}
+              ref={tabsContainerRef}
+            >
+              <div className="flex space-x-4 pb-2">
+                {[
+                  { id: "all", name: "전체" },
+                  { id: "books", name: "도서" },
+                  { id: "reviews", name: "서평" },
+                  { id: "clubs", name: "독서모임" },
+                  { id: "recommendations", name: "추천도서" },
+                  { id: "morning", name: "아침독서" },
+                  { id: "diaries", name: "독서일기" },
+                  { id: "discussions", name: "독서토론" },
+                  { id: "new_releases", name: "신간도서" },
+                  { id: "bestsellers", name: "베스트셀러" },
+                  { id: "classics", name: "고전" },
+                  { id: "foreign", name: "외국도서" },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleTabChange(tab.id)}
+                    className={`whitespace-nowrap px-4 py-2 font-medium text-sm rounded-full transition-colors flex-shrink-0 ${activeTab === tab.id ? "bg-rose-100 text-rose-600" : "text-gray-600 hover:text-rose-500"
+                      }`}
+                  >
+                    {tab.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 우측 스크롤 버튼 */}
+            <button
+              onClick={scrollTabsRight}
+              className="flex-shrink-0 p-1.5 rounded-full bg-white shadow-sm text-gray-600 hover:bg-gray-100 ml-2 border border-gray-200"
+              aria-label="Scroll tabs right"
+            >
+              <ChevronRight size={16} />
+            </button>
           </div>
         </div>
 
         {/* Popular Tags */}
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <div className="flex items-center mb-3">
             <Hash size={18} className="text-rose-500 mr-1" />
             <h2 className="text-lg font-medium text-gray-800">인기 태그</h2>
@@ -313,11 +355,25 @@ export default function StoriesPage() {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Instagram Feed */}
         <InstagramFeed searchTerm={searchTerm} activeTab={activeTab} onMenuClick={toggleMobileMenu} />
       </div>
+
+      <div className="fixed bottom-6 right-6">
+        <Link href="/diary">
+          <motion.button
+            className="flex items-center justify-center w-14 h-14 bg-rose-500 text-white rounded-full shadow-lg"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <PenSquare size={24} />
+            <span className="sr-only">독서 일기</span>
+          </motion.button>
+        </Link>
+      </div>
+
     </div>
   )
 }

@@ -19,6 +19,7 @@ import {
   Grid,
   List,
   SlidersHorizontal,
+  Plus,
 } from "lucide-react"
 import ToastNotification from "@/components/toast-notification"
 
@@ -124,7 +125,7 @@ export default function DiaryListPage() {
   const [toastMessage, setToastMessage] = useState("")
   const [toastType, setToastType] = useState<"success" | "error" | "info">("success")
   const [filterOpen, setFilterOpen] = useState(false)
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list")
   const [sortBy, setSortBy] = useState<"recent" | "rating" | "title">("recent")
   const [filterPublic, setFilterPublic] = useState<"all" | "public" | "private">("all")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -229,7 +230,7 @@ export default function DiaryListPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-rose-600 mb-2">나의 독서 일기</h1>
+          <h1 className="text-3xl font-bold text-rose-600 mb-2">내 독서 일기</h1>
           <p className="text-gray-600">소중한 독서 경험을 기록하고 관리하세요</p>
         </motion.div>
 
@@ -386,7 +387,7 @@ export default function DiaryListPage() {
           </div>
 
           {/* 뷰 모드 토글 */}
-          <div className="bg-gray-100 rounded-lg p-1 inline-flex">
+          {/* <div className="bg-gray-100 rounded-lg p-1 inline-flex">
             <button
               onClick={() => setViewMode("grid")}
               className={`p-2 rounded ${viewMode === "grid" ? "bg-white shadow-sm" : "text-gray-500"}`}
@@ -401,7 +402,7 @@ export default function DiaryListPage() {
             >
               <List size={18} />
             </button>
-          </div>
+          </div> */}
 
           {/* 새 독서 일기 작성 버튼 */}
           <Link href="/diary/create">
@@ -628,9 +629,7 @@ export default function DiaryListPage() {
                           <Calendar size={14} className="text-gray-400 mr-1" />
                           <span className="text-xs text-gray-500">{diary.readDate}</span>
                           <span className="mx-2 text-gray-300">|</span>
-                          <span className="text-xs text-gray-500">
-                            {new Date(diary.createdAt).toLocaleDateString()}
-                          </span>
+                          <span className="text-xs text-gray-500">{diary.createdAt}</span>
                         </div>
                         <p className="text-sm text-gray-700 mb-2 line-clamp-2">{diary.content}</p>
                         <div className="flex flex-wrap gap-1">
@@ -658,7 +657,7 @@ export default function DiaryListPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <PenSquare size={24} />
+            <Plus size={24} />
           </motion.button>
         </Link>
       </div>

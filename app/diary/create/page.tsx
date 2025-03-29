@@ -106,7 +106,7 @@ export default function CreateDiaryPage() {
               whileTap={{ scale: 0.95 }}
             >
               <ArrowLeft size={18} />
-              <span>독서 일기로 돌아가기</span>
+              <span>내 독서 일기로 돌아가기</span>
             </motion.button>
           </Link>
         </div>

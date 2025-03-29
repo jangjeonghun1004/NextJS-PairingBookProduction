@@ -42,8 +42,8 @@ export default function ScrollContent() {
     sessionStorage.setItem("scrollPosition", window.scrollY.toString())
   }
 
-   // 샘플 인스타그램 카드 데이터
-   const instagramPosts = [
+  // 샘플 인스타그램 카드 데이터
+  const instagramPosts = [
     {
       id: 2,
       username: "제연",
@@ -203,7 +203,7 @@ export default function ScrollContent() {
             </div>
           </div>
         </div>
-        
+
         <Footer />
       </div>
     </div>

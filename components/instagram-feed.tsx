@@ -247,15 +247,15 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
   return (
     <div className="py-4">
       {/* Header with Menu and View Mode Toggle */}
-      <div className="flex justify-between items-center mb-4">
+      {/* <div className="flex justify-between items-center mb-4"> */}
         {/* Mobile Menu Button */}
-        <button
+        {/* <button
           className="md:hidden p-2 text-rose-600 hover:bg-rose-50 rounded-full transition-colors"
           onClick={onMenuClick}
           aria-label="메뉴"
         >
           <Menu size={24} />
-        </button>
+        </button> */}
 
         {/* View Mode Toggle */}
         {/* <div className="bg-gray-100 rounded-lg p-1 inline-flex">
@@ -274,7 +274,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
             <List size={18} />
           </button>
         </div> */}
-      </div>
+      {/* </div> */}
 
       {/* No results message */}
       {filteredPosts.length === 0 && (
