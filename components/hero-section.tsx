@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import AnimatedBackground from "./animated-background"
 import CustomLogo from "./icons/custom-logo"
 import { useTheme } from "./theme-provider"
-import LoggedInHero from "./logged-in-hero"
+// import LoggedInHero from "./logged-in-hero"
 import { useRouter } from "next/navigation"
 
 export default function HeroSection() {
@@ -44,9 +44,9 @@ export default function HeroSection() {
   }, [])
 
   // 로그인 상태일 경우 LoggedInHero 컴포넌트 렌더링
-  if (isLoggedIn) {
-    return <LoggedInHero />
-  }
+  // if (isLoggedIn) {
+  //   return <LoggedInHero />
+  // }
 
   // More dynamic animation variants
   const titleContainerVariants = {
@@ -95,7 +95,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Animated background only in hero section */}
-      <AnimatedBackground particleCount={60} elementCount={20} elements={["♥", "♡","♥", "♡"]} />
+      <AnimatedBackground particleCount={60} elementCount={20} elements={["♥", "♡"]} />
 
       {/* Gradient overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/70 pointer-events-none" />

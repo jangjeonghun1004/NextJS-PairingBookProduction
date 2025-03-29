@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, useScroll, AnimatePresence } from "framer-motion"
 import InstagramCard from "./instagram-card"
-import { Loader2, AlertCircle, Search, Grid, List, Menu } from "lucide-react"
+import { Loader2, AlertCircle, Search, Grid, List, Menu, LoaderPinwheel } from "lucide-react"
 
 // Sample data for posts
 const INITIAL_POSTS = [
@@ -138,11 +138,6 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
   const [hasMore, setHasMore] = useState(true)
   // const [showAlert, setShowAlert] = useState(false)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  })
 
   // Filter posts based on search term and active tab
   useEffect(() => {
@@ -223,19 +218,19 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
 
       // Show alert after loading
       // setShowAlert(true)
-      // setTimeout(() => setShowAlert(false), 3000)
+      // setTimeout(() => setShowAlert(false), 1000)
 
       // Limit the number of pages that can be loaded
       if (page >= 4) {
         setHasMore(false)
       }
-    }, 1500)
+    }, 1000)
   }
 
   // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !loading && hasMore) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1500 && !loading && hasMore) {
         loadMorePosts()
       }
     }
@@ -250,7 +245,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
   }
 
   return (
-    <div className="py-4" ref={containerRef}>
+    <div className="py-4">
       {/* Header with Menu and View Mode Toggle */}
       <div className="flex justify-between items-center mb-4">
         {/* Mobile Menu Button */}
@@ -263,7 +258,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
         </button>
 
         {/* View Mode Toggle */}
-        <div className="bg-gray-100 rounded-lg p-1 inline-flex">
+        {/* <div className="bg-gray-100 rounded-lg p-1 inline-flex">
           <button
             onClick={() => setViewMode("grid")}
             className={`p-2 rounded ${viewMode === "grid" ? "bg-white shadow-sm" : "text-gray-500"}`}
@@ -278,7 +273,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
           >
             <List size={18} />
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* No results message */}
@@ -324,7 +319,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
       )}
 
       {/* List View */}
-      {viewMode === "list" && filteredPosts.length > 0 && (
+      {/* {viewMode === "list" && filteredPosts.length > 0 && (
         <div className="space-y-6">
           {filteredPosts.map((post, index) => (
             <InstagramCard
@@ -344,7 +339,7 @@ export default function InstagramFeed({ searchTerm = "", activeTab = "all", onMe
             />
           ))}
         </div>
-      )}
+      )} */}
 
       {/* Loading indicator */}
       {loading && (

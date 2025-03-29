@@ -14,8 +14,10 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { logoColor, logoStrokeColor } = useTheme()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [showProfileMenu, setShowProfileMenu] = useState(false)
-  const profileMenuRef = useRef<HTMLDivElement>(null)
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+  const [showProfileMobileMenu, setShowProfileMobileMenu] = useState(false)
+  const profileMobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Change navbar background on scroll
   useEffect(() => {
@@ -45,6 +47,10 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
         setShowProfileMenu(false)
+      }
+
+      if (profileMobileMenuRef.current && !profileMobileMenuRef.current.contains(event.target as Node)) {
+        setShowProfileMobileMenu(false)
       }
     }
 
@@ -143,8 +149,8 @@ export default function Navbar() {
               <CustomLogo
                 width={32}
                 height={32}
-                primaryColor="#ff69b4" // 고정 색상 적용
-                strokeColor="#ff0000" // 고정 색상 적용
+                primaryColor="" // 고정 색상 적용
+                strokeColor="rgb(223, 29, 71)" // 고정 색상 적용
               />
               <span className="font-bold text-rose-600 text-lg">페어링 BOOK</span>
             </div>
@@ -228,7 +234,7 @@ export default function Navbar() {
                       <p className="text-sm font-medium text-gray-800">김독서</p>
                       <p className="text-xs text-gray-500 truncate">reader@example.com</p>
                     </div>
-                    <Link href="/profile/me">
+                    <Link href="/profile/bookworm_jane">
                       <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <User size={16} className="mr-2" />
                         <span>내 프로필</span>
@@ -272,7 +278,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-4 md:hidden">
           {/* Stories Link for Mobile */}
-          <motion.div variants={itemVariants}>
+          {/* <motion.div variants={itemVariants}>
             <Link href="/stories">
               <motion.button
                 className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
@@ -283,7 +289,7 @@ export default function Navbar() {
                 <BookOpen size={18} />
               </motion.button>
             </Link>
-          </motion.div>
+          </motion.div> */}
 
           {/* Diary Link for Mobile */}
           {/* <motion.div variants={itemVariants}>
@@ -300,7 +306,7 @@ export default function Navbar() {
           </motion.div> */}
 
           {/* Discussion Link for Mobile */}
-          <motion.div variants={itemVariants}>
+          {/* <motion.div variants={itemVariants}>
             <Link href="/discussions">
               <motion.button
                 className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
@@ -311,10 +317,10 @@ export default function Navbar() {
                 <MessageCircle size={18} />
               </motion.button>
             </Link>
-          </motion.div>
+          </motion.div> */}
 
           {/* Pairing Link for Mobile */}
-          <motion.div variants={itemVariants}>
+          {/* <motion.div variants={itemVariants}>
             <Link href="/pairing">
               <motion.button
                 className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
@@ -325,14 +331,14 @@ export default function Navbar() {
                 <Users size={18} />
               </motion.button>
             </Link>
-          </motion.div>
+          </motion.div> */}
 
           {/* Login Button or Avatar for Mobile */}
           <motion.div variants={itemVariants}>
             {isLoggedIn ? (
-              <div className="relative" ref={profileMenuRef}>
+              <div className="relative" ref={profileMobileMenuRef}>
                 <motion.div
-                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                  onClick={() => setShowProfileMobileMenu(!showProfileMobileMenu)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -348,7 +354,7 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* Mobile Profile Dropdown Menu */}
-                {showProfileMenu && (
+                {showProfileMobileMenu && (
                   <motion.div
                     className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20 py-1 border border-gray-200"
                     initial={{ opacity: 0, y: -10 }}
@@ -359,7 +365,7 @@ export default function Navbar() {
                       <p className="text-sm font-medium text-gray-800">김독서</p>
                       <p className="text-xs text-gray-500 truncate">reader@example.com</p>
                     </div>
-                    <Link href="/profile/me">
+                    <Link href="/profile/bookworm_jane">
                       <button className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <User size={14} className="mr-2" />
                         <span>내 프로필</span>
@@ -433,11 +439,8 @@ export default function Navbar() {
             <div className="flex flex-col gap-4">
               {[
                 { name: "독서 이야기", id: "stories", href: "/stories" },
-                { name: "독서 일기", id: "diary-create", href: "/diary/create" },
                 { name: "독서 토론", id: "discussion-create", href: "/discussions" },
                 { name: "페어링 친구", id: "pairing", href: "/pairing" },
-                { name: "내 프로필", id: "profile", href: "/profile/me" },
-                { name: "계정 설정", id: "settings", href: "/account/settings" },
               ].map((item, index) => (
                 <motion.div key={item.id} variants={mobileItemVariants}>
                   <Link href={item.href}>
@@ -447,17 +450,6 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-
-              {isLoggedIn && (
-                <motion.div variants={mobileItemVariants}>
-                  <button
-                    className="block text-red-600 hover:text-red-500 font-medium py-2 text-left"
-                    onClick={() => setIsLoggedIn(false)}
-                  >
-                    로그아웃
-                  </button>
-                </motion.div>
-              )}
             </div>
           </motion.div>
         )}
