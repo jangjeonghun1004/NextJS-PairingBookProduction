@@ -170,8 +170,8 @@ export default function InstagramCard({
         ref={cardRef}
         className="bg-white rounded-lg shadow-sm overflow-hidden cursor-pointer"
         variants={cardVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        // initial="hidden"
+        // animate={isInView ? "visible" : "hidden"}
         exit="exit"
         whileHover={{
           y: -5,
