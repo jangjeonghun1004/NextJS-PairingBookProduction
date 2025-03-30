@@ -2,9 +2,6 @@
 
 import { useEffect, useState } from "react"
 import HeroSection from "./components/hero-section"
-import FeaturesSection from "./components/features-section"
-import TestimonialsSection from "./components/testimonials-section"
-import CTASection from "./components/cta-section"
 import Footer from "./components/footer"
 import Navbar from "./components/navbar"
 import Link from "next/link"
@@ -15,7 +12,6 @@ import InstagramCard from "./components/instagram-card"
 export default function ScrollContent() {
   // 스크롤 위치 저장을 위한 상태
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // 컴포넌트 마운트 시 저장된 스크롤 위치가 있으면 복원
   useEffect(() => {
@@ -25,15 +21,6 @@ export default function ScrollContent() {
       // 한 번 사용한 후에는 삭제
       sessionStorage.removeItem("scrollPosition")
     }
-
-    // 데모 목적으로 로그인 상태 시뮬레이션
-    // 실제 구현에서는 세션/쿠키/토큰 등으로 확인
-    const simulateLogin = () => {
-      // 50% 확률로 로그인 상태 설정 (데모용)
-      setIsLoggedIn(true)
-    }
-
-    simulateLogin()
   }, [])
 
   // 스크롤 위치 저장 함수
@@ -143,29 +130,19 @@ export default function ScrollContent() {
         {/* Instagram Cards Section (대체) */}
         <div className="py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4">
-            <motion.h2
+            <h2
               className="text-3xl font-bold text-rose-600 mb-8 text-center"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              }}
             >
               {/* 독자들의 이야기 */}
               하트페어링 이야기
-            </motion.h2>
+            </h2>
 
-            <motion.p
+            <p
               className="text-lg text-rose-800 text-center mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
             >
               {/* 페어링 BOOK 독자들의 다양한 이야기를 만나보세요 */}
               채널A 새 연애 예능
-            </motion.p>
+            </p>
 
             {/* InstagramCard를 Link로 감싸는 대신 직접 클릭 이벤트 처리 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -191,14 +168,12 @@ export default function ScrollContent() {
 
             <div className="mt-12 text-center">
               <Link href="/stories" onClick={saveScrollPosition}>
-                <motion.button
+                <button
                   className="inline-flex items-center gap-2 px-6 py-3 bg-rose-500 text-white rounded-full font-medium shadow-md hover:bg-rose-600 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <span>더 많은 이야기 보기</span>
                   <ArrowRight size={16} />
-                </motion.button>
+                </button>
               </Link>
             </div>
           </div>

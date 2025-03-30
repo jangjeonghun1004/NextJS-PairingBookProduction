@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal, Smile, Share2, Flag, UserPlus } from "lucide-react"
+import { Heart, MessageCircle, MoreHorizontal, Share2, Flag, UserPlus } from "lucide-react"
 import ToastNotification from "./toast-notification"
 
 interface Comment {
@@ -167,12 +167,7 @@ export default function InstagramCard({
   return (
     <>
       <motion.div
-        ref={cardRef}
         className="bg-white rounded-lg shadow-sm overflow-hidden cursor-pointer"
-        variants={cardVariants}
-        // initial="hidden"
-        // animate={isInView ? "visible" : "hidden"}
-        exit="exit"
         whileHover={{
           y: -5,
           boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
@@ -268,7 +263,7 @@ export default function InstagramCard({
           )}
 
           {/* Double Tap Heart Animation */}
-          {isDoubleTapLiked && (
+          {/* {isDoubleTapLiked && (
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
               initial={{ opacity: 0, scale: 0 }}
@@ -278,7 +273,7 @@ export default function InstagramCard({
             >
               <Heart size={64} className="text-white fill-white drop-shadow-lg" />
             </motion.div>
-          )}
+          )} */}
         </div>
 
         {/* Caption Preview */}

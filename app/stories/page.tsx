@@ -90,45 +90,12 @@ export default function StoriesPage() {
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <motion.div
+        <div
           className="text-center mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
         >
           <h1 className="text-3xl font-bold text-rose-600 mb-2">독서 이야기</h1>
           <p className="text-gray-600">페어링 BOOK 독자들의 다양한 이야기를 만나보세요</p>
-        </motion.div>
-
-        {/* 버튼 그룹 */}
-        {/* <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <Link href="/diary">
-            <motion.button
-              className="flex items-center gap-2 px-6 py-3 bg-rose-500 text-white rounded-full font-medium shadow-md hover:bg-rose-600 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <PenSquare size={18} />
-              <span>독서 일기 작성하기</span>
-            </motion.button>
-          </Link>
-
-          <Link href="/discussions">
-            <motion.button
-              className="flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-full font-medium shadow-md hover:bg-rose-700 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <MessageSquare size={18} />
-              <span>토론 발제문 작성하기</span>
-            </motion.button>
-          </Link>
-        </motion.div> */}
+        </div>
 
         {/* Search Bar */}
         <motion.div
@@ -226,60 +193,6 @@ export default function StoriesPage() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Mobile Menu */}
-        {/* <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <motion.div
-                className="absolute top-0 left-0 w-3/4 h-full bg-white shadow-lg p-4"
-                initial={{ x: "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ type: "spring", damping: 25 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-bold text-rose-600">카테고리</h3>
-                  <button className="p-2 text-gray-500 hover:text-gray-700" onClick={() => setMobileMenuOpen(false)}>
-                    <X size={24} />
-                  </button>
-                </div>
-
-                <div className="space-y-2">
-                  {[
-                    { id: "all", name: "전체" },
-                    { id: "books", name: "도서" },
-                    { id: "reviews", name: "서평" },
-                    { id: "clubs", name: "독서모임" },
-                    { id: "recommendations", name: "추천도서" },
-                    { id: "morning", name: "아침독서" },
-                    { id: "diaries", name: "독서일기" },
-                    { id: "discussions", name: "독서토론" },
-                  ].map((tab) => (
-                    <button
-                      key={tab.id}
-                      onClick={() => handleTabChange(tab.id)}
-                      className={`block w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                        activeTab === tab.id
-                          ? "bg-rose-100 text-rose-600 font-medium"
-                          : "text-gray-700 hover:bg-gray-100"
-                      }`}
-                    >
-                      {tab.name}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
-
         {/* Category Tabs - Scrollable */}
         <div className="mb-8 border-b border-gray-200 relative">
           <div className="flex items-center mb-2">
@@ -336,26 +249,6 @@ export default function StoriesPage() {
           </div>
         </div>
 
-        {/* Popular Tags */}
-        {/* <div className="mb-8">
-          <div className="flex items-center mb-3">
-            <Hash size={18} className="text-rose-500 mr-1" />
-            <h2 className="text-lg font-medium text-gray-800">인기 태그</h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {POPULAR_TAGS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => handleTagSelect(tag)}
-                className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
-                  selectedTag === tag ? "bg-rose-500 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                #{tag}
-              </button>
-            ))}
-          </div>
-        </div> */}
 
         {/* Instagram Feed */}
         <InstagramFeed searchTerm={searchTerm} activeTab={activeTab} onMenuClick={toggleMobileMenu} />
@@ -363,14 +256,12 @@ export default function StoriesPage() {
 
       <div className="fixed bottom-6 right-6">
         <Link href="/diary">
-          <motion.button
+          <button
             className="flex items-center justify-center w-14 h-14 bg-rose-500 text-white rounded-full shadow-lg"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
             <PenSquare size={24} />
             <span className="sr-only">독서 일기</span>
-          </motion.button>
+          </button>
         </Link>
       </div>
 

@@ -4,14 +4,11 @@ import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import AnimatedBackground from "./animated-background"
 import CustomLogo from "./icons/custom-logo"
-import { useTheme } from "./theme-provider"
-// import LoggedInHero from "./logged-in-hero"
 import { useRouter } from "next/navigation"
 
 export default function HeroSection() {
   const [animationStage, setAnimationStage] = useState(0)
   const [visible, setVisible] = useState(false)
-  const { logoColor, logoStrokeColor } = useTheme()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const router = useRouter();
 
@@ -42,11 +39,6 @@ export default function HeroSection() {
       clearTimeout(timer1)
     }
   }, [])
-
-  // 로그인 상태일 경우 LoggedInHero 컴포넌트 렌더링
-  // if (isLoggedIn) {
-  //   return <LoggedInHero />
-  // }
 
   // More dynamic animation variants
   const titleContainerVariants = {

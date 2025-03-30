@@ -4,16 +4,14 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import CustomLogo from "./icons/custom-logo"
-import { useTheme } from "./theme-provider"
 import { Avatar } from "@/components/ui/avatar"
-import { User, Settings, LogOut, BookOpen, PenSquare, MessageCircle, Users, ChevronDown } from "lucide-react"
+import { User, Settings, LogOut,ChevronDown } from "lucide-react"
 import Image from "next/image"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { logoColor, logoStrokeColor } = useTheme()
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [showProfileMobileMenu, setShowProfileMobileMenu] = useState(false)
@@ -34,15 +32,6 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    // 데모 목적으로 로그인 상태 시뮬레이션
-    // 실제 구현에서는 세션/쿠키/토큰 등으로 확인
-    const simulateLogin = () => {
-      // 50% 확률로 로그인 상태 설정 (데모용)
-      setIsLoggedIn(true)
-    }
-
-    simulateLogin()
-
     // 프로필 메뉴 외부 클릭 감지
     const handleClickOutside = (event: MouseEvent) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
@@ -60,43 +49,6 @@ export default function Navbar() {
     }
   }, [])
 
-  // Smooth scroll to section
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-    setMobileMenuOpen(false)
-  }
-
-  // More dynamic animation variants
-  const navbarVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: -20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-      },
-    },
-  }
 
   const mobileMenuVariants = {
     hidden: { opacity: 0, height: 0 },
@@ -132,11 +84,8 @@ export default function Navbar() {
   }
 
   return (
-    <motion.nav
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent"}`}
-      variants={navbarVariants}
-      initial="hidden"
-      animate="visible"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
@@ -164,51 +113,38 @@ export default function Navbar() {
             { name: "독서 토론", id: "discussion-create", href: "/discussions" },
             { name: "페어링 친구", id: "pairing", href: "/pairing" },
           ].map((item, index) => (
-            <motion.div key={item.id} variants={itemVariants}>
+            <div key={item.id}>
               <Link href={item.href}>
-                <motion.span
+                <span
                   className="text-rose-700 hover:text-rose-500 font-medium cursor-pointer"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -3,
-                    transition: { type: "spring", stiffness: 400, damping: 10 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   {item.name}
-                </motion.span>
+                </span>
               </Link>
-            </motion.div>
+            </div>
           ))}
 
           {/* Profile Creation Button - 로그인 상태가 아닐 때만 표시 */}
           {!isLoggedIn && (
-            <motion.div variants={itemVariants}>
+            <div >
               <Link href="/profile/create">
-                <motion.button
+                <button
                   className="flex items-center gap-1 px-4 py-2 bg-rose-100 text-rose-600 rounded-full font-medium hover:bg-rose-200 transition-colors"
-                  whileHover={{
-                    scale: 1.05,
-                    transition: { type: "spring", stiffness: 400, damping: 10 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <User size={16} />
                   <span>프로필 작성</span>
-                </motion.button>
+                </button>
               </Link>
-            </motion.div>
+            </div>
           )}
 
           {/* Login Button or Avatar */}
-          <motion.div variants={itemVariants}>
+          <div>
             {isLoggedIn ? (
               <div className="relative" ref={profileMenuRef}>
-                <motion.div
+                <div
                   className="flex items-center gap-2 cursor-pointer"
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <Avatar className="h-9 w-9 border-2 border-rose-200">
                     <Image
@@ -220,15 +156,12 @@ export default function Navbar() {
                     />
                   </Avatar>
                   <ChevronDown size={16} className="text-gray-500" />
-                </motion.div>
+                </div>
 
                 {/* Profile Dropdown Menu */}
                 {showProfileMenu && (
-                  <motion.div
+                  <div
                     className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 py-1 border border-gray-200"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
                   >
                     <div className="px-4 py-3 border-b border-gray-100">
                       <p className="text-sm font-medium text-gray-800">김독서</p>
@@ -260,93 +193,29 @@ export default function Navbar() {
                       <LogOut size={16} className="mr-2" />
                       <span>로그아웃</span>
                     </button>
-                  </motion.div>
+                  </div>
                 )}
               </div>
             ) : (
               <Link href="/login">
-                <motion.button
+                <button
                   className="px-5 py-2 bg-rose-500 text-white rounded-full font-medium shadow-sm hover:bg-rose-600 transition-colors ml-2"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-                    transition: { type: "spring", stiffness: 400, damping: 10 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   로그인
-                </motion.button>
+                </button>
               </Link>
             )}
-          </motion.div>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-4 md:hidden">
-          {/* Stories Link for Mobile */}
-          {/* <motion.div variants={itemVariants}>
-            <Link href="/stories">
-              <motion.button
-                className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="독서 이야기"
-              >
-                <BookOpen size={18} />
-              </motion.button>
-            </Link>
-          </motion.div> */}
-
-          {/* Diary Link for Mobile */}
-          {/* <motion.div variants={itemVariants}>
-            <Link href="/diary/create">
-              <motion.button
-                className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="독서 일기"
-              >
-                <PenSquare size={18} />
-              </motion.button>
-            </Link>
-          </motion.div> */}
-
-          {/* Discussion Link for Mobile */}
-          {/* <motion.div variants={itemVariants}>
-            <Link href="/discussions">
-              <motion.button
-                className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="독서 토론"
-              >
-                <MessageCircle size={18} />
-              </motion.button>
-            </Link>
-          </motion.div> */}
-
-          {/* Pairing Link for Mobile */}
-          {/* <motion.div variants={itemVariants}>
-            <Link href="/pairing">
-              <motion.button
-                className="flex items-center justify-center p-2 bg-rose-100 text-rose-600 rounded-full hover:bg-rose-200 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="페어링 친구"
-              >
-                <Users size={18} />
-              </motion.button>
-            </Link>
-          </motion.div> */}
-
           {/* Login Button or Avatar for Mobile */}
-          <motion.div variants={itemVariants}>
+          <div >
             {isLoggedIn ? (
               <div className="relative" ref={profileMobileMenuRef}>
-                <motion.div
+                <div
                   onClick={() => setShowProfileMobileMenu(!showProfileMobileMenu)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <Avatar className="h-8 w-8 border-2 border-rose-200">
                     <Image
@@ -357,15 +226,12 @@ export default function Navbar() {
                       className="object-cover"
                     />
                   </Avatar>
-                </motion.div>
+                </div>
 
                 {/* Mobile Profile Dropdown Menu */}
                 {showProfileMobileMenu && (
-                  <motion.div
+                  <div
                     className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-20 py-1 border border-gray-200"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
                   >
                     <div className="px-4 py-2 border-b border-gray-100">
                       <p className="text-sm font-medium text-gray-800">김독서</p>
@@ -391,28 +257,23 @@ export default function Navbar() {
                       <LogOut size={14} className="mr-2" />
                       <span>로그아웃</span>
                     </button>
-                  </motion.div>
+                  </div>
                 )}
               </div>
             ) : (
               <Link href="/login">
-                <motion.button
+                <button
                   className="px-4 py-1.5 bg-rose-500 text-white rounded-full font-medium text-sm shadow-sm hover:bg-rose-600 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   로그인
-                </motion.button>
+                </button>
               </Link>
             )}
-          </motion.div>
+          </div>
 
           {/* 모바일 메뉴 버튼은 유지 */}
-          <motion.button
+          <button
             className="text-rose-600 p-2"
-            variants={itemVariants}
-            whileHover={{ scale: 1.1, rotate: 180, transition: { duration: 0.5 } }}
-            whileTap={{ scale: 0.9 }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg
@@ -428,19 +289,15 @@ export default function Navbar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
-          </motion.button>
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <AnimatePresence mode="wait">
         {mobileMenuOpen && (
-          <motion.div
+          <div
             className="md:hidden absolute top-full left-0 right-0 bg-white/90 backdrop-blur-md shadow-md p-4 rounded-b-lg overflow-hidden"
-            variants={mobileMenuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
           >
             <div className="flex flex-col gap-4">
               {[
@@ -448,19 +305,19 @@ export default function Navbar() {
                 { name: "독서 토론", id: "discussion-create", href: "/discussions" },
                 { name: "페어링 친구", id: "pairing", href: "/pairing" },
               ].map((item, index) => (
-                <motion.div key={item.id} variants={mobileItemVariants}>
+                <div key={item.id}>
                   <Link href={item.href}>
                     <span className="block text-rose-700 hover:text-rose-500 font-medium py-2 text-left">
                       {item.name}
                     </span>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   )
 }
 
